@@ -1,9 +1,9 @@
 from init import db, ma
 
-class User(db.model):
+class User(db.Model):
     __tablename__ = 'users'
 
-    id = db.Column(db.Integer, primaruy_key=True)
+    id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(50))
     email = db.Column(db.String(100), nullable=False, unique=True)
     password = db.Column(db.String(100), nullable=False)
