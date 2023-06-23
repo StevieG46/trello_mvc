@@ -10,14 +10,14 @@ class Card(db.Model):
     status = db.Column(db.String)
     priority = db.Column(db.String)
 
-    user_id = db.Column(db.Integer, db.ForeginKey('users.id'), nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
 
     user = db.relationship('User', back_populates='cards')
 
     #   ( id 1 , title: Card 1, description: Card 1 desc, user: { 3, name' User 1' , email, etc})
 
 class CardSchema(ma.Schema):
-    user = fields.Nested('UserSchema' only=['name', 'email'])
+    user = fields.Nested('UserSchema', only=['name', 'email'])
 
     class Meta:
         fields = ('id', 'title', 'description', 'date', 'status', 'priority', 'user')
