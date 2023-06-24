@@ -43,4 +43,4 @@ def auth_login():
         token = create_access_token(identity=str(user.id), expires_delta=timedelta(days=1))
         return {'email': user.email, 'token': token, 'is_admin': user.is_admin }
     else:
-        return {'error': 'Invalid email or password'}, 401 
+        return {'error': 'Invalid email or password'}, 401
