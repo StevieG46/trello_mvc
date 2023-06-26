@@ -5,7 +5,7 @@ class Comment(db.Model): # {id: 1, "message": "Comment 1", "user": {id: 1, name:
     __tablename__ = "comments"
 
     id = db.Column(db.Integer, primary_key=True)
-    message = db.Columnn(db.Text)
+    message = db.Column(db.Text)
     
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
     card_id = db.Column(db.Integer, db.ForeignKey('cards.id'), nullable=False)
