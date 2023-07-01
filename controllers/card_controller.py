@@ -3,8 +3,10 @@ from init import db
 from models.card import Card, cards_schema, card_schema
 from datetime import date
 from flask_jwt_extended import get_jwt_identity, jwt_required
+from .comment_controller import comments_bp
 
 cards_bp = Blueprint('cards', __name__, url_prefix='/cards')
+cards_bp.register_blueprint(comments_bp, url_prefix='<int:card_id>/comments')
 
 @cards_bp.route('/')
 def get_all_cards():
@@ -53,7 +55,6 @@ def delete_one_card(id):
     else:
         return {'error': f'Card not found with id {id}'}, 404
 
-
 @cards_bp.route('/<int:id>', methods=['PUT', 'PATCH'])
 @jwt_required()
 def update_one_card(id):
@@ -68,4 +69,4 @@ def update_one_card(id):
         db.session.commit()
         return card_schema.dump(card)
     else:
-        return {'error': f'Card not found with id{id}'}, 404
+        return {'error': f'Card not found with id {id}'}, 404
